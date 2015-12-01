@@ -14,7 +14,9 @@ http.use_ssl = true
 http.verify_mode = OpenSSL::SSL::VERIFY_PEER
 
 request = Net::HTTP::Get.new(uri.request_uri)
-request.add_field('X-App-Token', ARGV[0])
+# pass app token as command line argument
+# get app token here: https://data.cityofchicago.org/developers/docs/historical-traffic-congestion-region
+request.add_field('X-App-Token', ARGV[0]) 
 
 response = http.request(request)
 puts response.code
@@ -23,8 +25,8 @@ CSV.open("output.csv", "wb") { |csv| csv << ["time", "speed", "number_of_reads",
 
 CSV.open("output.csv", "a+") do |csv|
   JSON.parse(response.body).each do |h|
-  	arr = []
-  	h.each { |_,v| arr << v}
-  	csv << arr
+    arr = []
+    h.each { |_,v| arr << v}
+    csv << arr
   end
 end
