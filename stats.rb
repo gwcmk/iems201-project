@@ -4,8 +4,10 @@ require 'net/https'
 require 'csv'
 require 'JSON'
 
-region_param = 'region_id=13' # 13 is the loop, list here: http://bit.ly/103beCf
-time_param = "$where=time > '2015-01-11' and time < '2015-01-12'" # date range
+# path is 1->3->6->10->13
+# 13 is the loop, list here: http://bit.ly/103beCf
+region_param = 'region_id=13' 
+time_param = "$where=time > '2010-12-01' and time < '2015-12-01'" # date range
 
 uri = URI.parse(URI.escape("https://data.cityofchicago.org/resource/historical-traffic-congestion-region.json?#{region_param}&#{time_param}"))
 
